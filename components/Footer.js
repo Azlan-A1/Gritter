@@ -8,10 +8,10 @@ function Footer() {
             <p>&copy; {new Date().getFullYear()} Gritter. All Rights Reserved.</p>
             <nav>
                 <Link href="/privacyPolicy">
-                    <a style={{ color: '#fff', marginRight: '1rem' }}>Privacy Policy</a>
+                    <span style={{ color: '#fff', marginRight: '1rem' }}>Privacy Policy</span>
                 </Link>
                 <Link href="/termsOfService">
-                    <a style={{ color: '#fff' }}>Terms of Service</a>
+                    <span style={{ color: '#fff' }}>Terms of Service</span>
                 </Link>
             </nav>
         </footer>

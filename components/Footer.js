@@ -1,4 +1,4 @@
-//components Footer.js
+//components/Footer.js
 
 import Link from 'next/link';
 

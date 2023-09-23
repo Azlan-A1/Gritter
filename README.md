@@ -1,2 +1,2 @@
 # Glitter
-ETHGlobal New York City Hackathon Project 2023.
+ETHGlobal New York City Hackathon Project 2023

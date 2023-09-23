@@ -1,9 +1,16 @@
 import React from 'react';
+import Head from 'next/head';
+import Navbar from '../components/Navbar';
 
 function AboutPage() {
     return (
         <div>
-            <h1>About Gritter</h1>
+          <Head>
+            <title>About Gritter</title>
+          </Head>
+
+          <Navbar />
+            
             <p>
                 Gritter is an innovative platform designed to [Your Description Here].
             </p>

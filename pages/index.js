@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar';  // <-- Import the Navbar here
 
+
 export default function HomePage() {
   return (
     <div>

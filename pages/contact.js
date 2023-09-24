@@ -1,8 +1,7 @@
-// pages/contact.js
-
 import React from 'react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default function ContactUs() {
   return (
@@ -39,9 +38,8 @@ export default function ContactUs() {
         </form>
       </main>
 
-      <footer>
-        <p>&copy; 2023 Gritter. All Rights Reserved.</p>
-      </footer>
+      <Footer /> {/* <-- Include the Footer component here */}
+
     </div>
   );
 }

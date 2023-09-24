@@ -21,6 +21,8 @@ function Profile() {
                 <title>{user.name}'s Profile</title>
             </Head>
 
+            <Navbar />
+
             <div className="profile-container">
                 <img src={user.avatar} alt={`${user.name}'s Avatar`} className="avatar" />
                 <h1>{user.name}</h1>

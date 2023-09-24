@@ -10,7 +10,7 @@ from flask import Flask, make_response
 from flask_restful import Api, Resource, reqparse, abort
 from DB_API import *
 
-app =Flask(__name__)
+app = Flask(__name__)
 api = Api(app)
 
 us_Acc_info = reqparse.RequestParser()

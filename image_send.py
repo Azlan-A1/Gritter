@@ -1,15 +1,16 @@
 from airstack.execute_query import AirstackClient
 import asyncio
 
-from flask import Flask, request, render_template
+#from flask import Flask, request, render_template
 
 
 
-#address = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+address = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
 
 async def name_send(address):
     
     api_client = AirstackClient(api_key = "ef3d1cdeafb642d3a8d6a44664ce566c")
+    #Uses demo key from python SDK files
     query="""
 query MyQuery( $address: Address) {
   TokenNfts(input: {blockchain: ethereum, filter: {address: {_eq: $address}}}) {
@@ -40,17 +41,20 @@ query MyQuery( $address: Address) {
   }
 }            
 """
+#Query uses the AI integration on the airstack search model to collect information on the nft's image, token id, token address, blockchain status, how much was paid during transactions of the nfts including the block time stamp and transaction hash.
     variables =  {
        "address":address
 }
     
     execute_query_client  = api_client.create_execute_query_object(query = query, variables = variables) 
+    
     query_response = await execute_query_client.execute_query()
+    #execute_query turns the object into readable data
     if query_response is None:
         return "There are no nft's in this address"
     if query_response.data['TokenNfts']['TokenNft'] is None:
         return "Again there are no nft's in this address"
-    
+    #Checks if the address did not return any data through the search engine
     current_token_address = []
     tokenId = []
     image = []
@@ -60,6 +64,7 @@ query MyQuery( $address: Address) {
     payment_usdc = []
     average_eth = 0
     average_usdc = 0
+    #Iterates through the nft collection and puts every result in a list.
     for search_result_index in range(0,len(query_response.data['TokenNfts']['TokenNft'])):
         try:
             current_token_address.append(query_response.data['TokenNfts']['TokenNft'][search_result_index]['address'])
@@ -96,16 +101,16 @@ query MyQuery( $address: Address) {
             try:
                 payment_eth.append(query_response.data["NFTSaleTransactions"]["NFTSaleTransaction"][search_result_index]["formattedPaymentAmountInNativeToken"])
             except:
-                payment_eth[search_result_index] = "No eth payment found"
+                payment_eth[search_result_index] = 0
             else:
                 payment_eth.append(query_response.data["NFTSaleTransactions"]["NFTSaleTransaction"][search_result_index]["formattedPaymentAmountInNativeToken"])
             try:
                 payment_usdc.append(query_response.data["NFTSaleTransactions"]["NFTSaleTransaction"][search_result_index]["formattedPaymentAmountInUSDC"])
             except:
-                payment_usdc[search_result_index] = "No usdc payment values found"
+                payment_usdc[search_result_index] = 0
             else:
                 payment_usdc.append(query_response.data["NFTSaleTransactions"]["NFTSaleTransaction"][search_result_index]["formattedPaymentAmountInUSDC"])
-             
+            #try and excepts in case only one nft did not return any data or values.
            
            
             average_eth+=payment_eth[search_result_index]
@@ -122,27 +127,9 @@ query MyQuery( $address: Address) {
     print(average_eth)
     print(average_usdc)
     print("\n\n\n")
+    print(transactionhash)
+    print("\n\n\n")
     print(query_response.data)
     return image[0]
 
-asyncio.run(name_send("0x343f999eAACdFa1f201fb8e43ebb35c99D9aE0c1"))
-
-# app = Flask(__name__)
-
-
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
-
-
-# @app.route('/search', methods=['POST'])
-# def search():
-    
-#     search_term = request.form.get('search_term')
-#     print("Search term entered:", search_term)
-#     image_url = asyncio.run(name_send(search_term))
-
-#     return "search term received: "+search_term+ " image url is: " + image_url + render_template('search_results.html', search_term=search_term, image_url=image_url)
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
+asyncio.run(name_send(address))

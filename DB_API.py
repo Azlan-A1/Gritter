@@ -12,6 +12,12 @@ def hash_Input(input_string):
     sha256.update(byte_string)
     return sha256.hexdigest()
 
+def get_Hash(Email):
+    if (collection.find_one({"Email":Email})):
+        return(collection.find_one({"Email": Email})["Password"])
+    return None
+
+
 def is_Email_Taken(Email):
     if (collection.find_one({"Email":Email}) is None):
         return False

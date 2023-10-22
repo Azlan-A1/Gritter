@@ -2,7 +2,7 @@ import pymongo
 from pymongo import MongoClient
 import hashlib
 
-cluster = MongoClient("mongodb+srv://rchwiec:hckYRocks3@cluster0.zes7f.mongodb.net/?retryWrites=true&w=majority")
+
 db = cluster["Main"]
 collection = db["Main"]
 

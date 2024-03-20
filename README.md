@@ -11,5 +11,5 @@ Features Embedded Onto Website Include:
 - Subscription System (Using Stripe API)
 - Login system (Create account by Signing up through Username/Email. Sign in and Sign out. NFT Profile Picture)
 - Database: MongoDB 
-- Translation of Web Pages/Info into Spanish
+- Translation of Web Pages/Info
 - World Coin API was used through commands primarily
